@@ -8,10 +8,17 @@
 using namespace std;
 Animal *head = nullptr;
 
-Animal *CreateAnimal (char *name, int id, int ownerId, int days){
-    auto *animal = new Animal();
+void UpdateName(Animal *animal, char *name){
+    if (animal->name)
+        delete animal->name;
     animal->name = new char[strlen(name) + 1]();
     strcpy(animal->name, name);
+}
+
+Animal *CreateAnimal (char *name, int id, int ownerId, int days){
+    auto *animal = new Animal();
+    animal->name = nullptr;
+    UpdateName(animal, name);
     animal->id = id;
     animal->owner_id = ownerId;
     animal->days = days;
@@ -79,7 +86,7 @@ void Insert(Animal *animal, int index){
     }
     if (index == count){
         // we add to the end
-        Animal *tail = GetAnimalAtIndex(index);
+        Animal *tail = GetAnimalAtIndex(index - 1);
         tail->next = animal;
         animal->next = nullptr;
         return;
@@ -107,7 +114,8 @@ int FindIndexForNewAnimal(Animal *newAnimal){
 }
 
 void FreeAnimalMemory(Animal *animal){
-    delete animal->name;
+    if (animal->name)
+        delete[] animal->name;
     delete animal;
 }
 
@@ -131,6 +139,31 @@ void RemoveOwner(int ownerId){
     }
 }
 
+int &modify(char *name, int id, int owner_id){
+    Animal *animal = FindAnimalById(head, id);
+
+    if (animal){
+        if (strcmp(animal->name, name) != 0){
+            UpdateName(animal, name);
+        }
+
+        if (animal->owner_id != owner_id){
+            Animal *newAnimal = CreateAnimal(name, id, owner_id, animal->days);
+            RemoveAnimal(animal);
+            int newIndex = FindIndexForNewAnimal(newAnimal);
+            Insert(newAnimal, newIndex);
+            return newAnimal->days;
+        }
+
+        return animal->days;
+    } else {
+        animal = CreateAnimal(name, id, owner_id, 1);
+        int newIndex = FindIndexForNewAnimal(animal);
+        Insert(animal, newIndex);
+        return animal->days;
+    }
+}
+
 void AddAnimal(char *name, int id, int ownerId, int days){
     Animal *animal = FindAnimalById(head, id);
     if (animal == nullptr){
@@ -138,8 +171,6 @@ void AddAnimal(char *name, int id, int ownerId, int days){
         int newIndex = FindIndexForNewAnimal(animal);
         Insert(animal, newIndex);
     } else {
-        delete animal->name;
-        animal->name = new char[strlen(name)]();
-        strcpy(animal->name, name);
+        UpdateName(animal, name);
     }
 }
