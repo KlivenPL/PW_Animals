@@ -18,5 +18,5 @@ struct Animal {
 void PrintAnimals();
 void AddAnimal(char *name, int id, int ownerId, int days);
 void RemoveOwner(int ownerId);
-int &modify(char *name, int id, int owner_id);
+int &modify(char *name, int id, int owner_id = 1);
 #endif //TESTOWY_ANIMAL_H
