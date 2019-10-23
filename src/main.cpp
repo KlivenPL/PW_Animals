@@ -25,6 +25,7 @@ int main() {
     modify("Berta2137", 51, 7) = 55;
     modify("Anna3", 3, 69) = 33;
     modify("Nowy", 77, 0) = 21;
+    modify("Anna3", 3, 69) = modify("Nowy zmiana nazwy", 77, 99) + 5;
     PrintAnimals();
     return 0;
 }
