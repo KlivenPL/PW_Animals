@@ -33,7 +33,7 @@ int main() {
     delete list1;
 
     AnimalList list2;
-    list1->modify("Nowa z Modify", 55, 11)=3333;
+    list2.modify("Nowa z Modify", 55, 11)=3333;
     list2.PrintAnimals();
     list2.AddAnimal("Renia2", 60, 3, 1);
     list2.AddAnimal("Anna1", 1, 1, 1);
