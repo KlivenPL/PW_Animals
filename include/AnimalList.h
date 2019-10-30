@@ -3,14 +3,10 @@
 
 #include "Animal.h"
 class AnimalList {
-    public:
+    private:
         Animal *head = nullptr;
 
-        AnimalList();
-        ~AnimalList();
-
         void PrintAnimals(Animal *node);
-        void PrintAnimals();
         Animal *FindAnimalById(Animal *node, int id);
         int Count(Animal *node, int prevCount = 0);
         Animal *GetAnimalAtIndex(int i);
@@ -18,8 +14,14 @@ class AnimalList {
         void Insert(Animal *animal, int index);
         int FindIndexForNewAnimal(Animal *newAnimal);
         void RemoveAnimal(Animal *animal);
+
+    public:
+        AnimalList();
+        ~AnimalList();
+
+        void PrintAnimals();
+        void AddAnimal(char *name, int id, int ownerId, int days);
         int &modify(char *name, int id, int owner_id);
         void RemoveOwner(int ownerId);
-        void AddAnimal(char *name, int id, int ownerId, int days);
 };
 #endif
