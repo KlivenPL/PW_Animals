@@ -7,16 +7,19 @@
 #include <iostream>
 using namespace std;
 
-struct Animal {
-    char *name;
-    int id;
-    int owner_id;
-    int days;
-    Animal *next;
+class Animal {
+    public:
+        char *name;
+        int id;
+        int owner_id;
+        int days;
+        Animal *next;
+
+        Animal(char *name, int id, int ownerId, int days);
+        ~Animal();
+
+        void UpdateName(char *name);
+        void RemoveOwner(int ownerId);
 };
 
-void PrintAnimals();
-void AddAnimal(char *name, int id, int ownerId, int days);
-void RemoveOwner(int ownerId);
-int &modify(char *name, int id, int owner_id = 1);
 #endif //TESTOWY_ANIMAL_H
