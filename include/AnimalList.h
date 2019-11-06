@@ -18,6 +18,8 @@ class AnimalList {
     public:
         AnimalList();
         ~AnimalList();
+        AnimalList &operator = (const AnimalList &);
+        AnimalList (const AnimalList &);
 
         void PrintAnimals();
         void AddAnimal(char *name, int id, int ownerId, int days);

@@ -15,6 +15,26 @@ AnimalList::~AnimalList(){
         RemoveAnimal(animal);
     }
 }
+AnimalList &AnimalList::operator= (const AnimalList &animalList){
+    cout << "Kopiuje liste operatorem"  << endl;
+    this->~AnimalList();
+    this->head = nullptr;
+    AnimalList *newList = new AnimalList(animalList);
+    return *newList;
+}
+
+AnimalList::AnimalList(const AnimalList &animalList){
+    cout << "Kopiuje liste" << endl;
+    this->head = new Animal(*animalList.head);
+    Animal *nodeExisting = animalList.head;
+    Animal *nodeNew = head;
+    for (int i = 0; nodeExisting->Next(); i++) {
+        nodeNew->Next() = new Animal(*nodeExisting->Next());
+        nodeExisting = nodeExisting->Next();
+        nodeNew = nodeNew->Next();
+    }
+    
+}
 
 void AnimalList::PrintAnimals(Animal *node){
     if (node != nullptr){

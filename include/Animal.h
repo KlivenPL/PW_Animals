@@ -15,6 +15,8 @@ class Animal {
     public:
         Animal(char *name, int id, int ownerId, int days);
         ~Animal();
+        Animal(const Animal &animal);
+        Animal & operator = (const Animal &animal);
 
         void UpdateName(char *name);
         void PrintAnimal();

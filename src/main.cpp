@@ -30,8 +30,9 @@ int main() {
     list1->modify("Anna3", 3, 69) = 33;
     list1->modify("Nowy", 77, 0) = 21;
     list1->modify("Anna3", 3, 69) = list1->modify("Nowy zmiana nazwy", 77, 99) + 5;
+    list1->AddAnimal("To lista 1", 200, 300, 4000);
     list1->PrintAnimals();
-    delete list1;
+   // delete list1;
 
     cout << endl << endl << "List2:" << endl;
     AnimalList list2;
@@ -60,5 +61,14 @@ int main() {
     list2.modify("Nowy", 77, 0) = 21;
     list2.modify("Anna3", 3, 69) = list2.modify("Nowy zmiana nazwy", 77, 99) + 5;
     list2.PrintAnimals();
+
+    //list1=&list2;
+    //list1->PrintAnimals();
+
+    AnimalList copy1 = *list1;
+    AnimalList copy2 = list2;
+
+
+
     return 0;
 }

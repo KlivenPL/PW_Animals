@@ -23,6 +23,24 @@ Animal::~Animal(){
         delete[] this->name;
 }
 
+Animal::Animal(const Animal &animal){
+    this->name = nullptr;
+    UpdateName(animal.name);
+    this->id = animal.id;
+    this->owner_id = animal.owner_id;
+    this->days = animal.days;
+    this->next = nullptr;
+
+    cout << "Animal copied: ";
+    PrintAnimal();
+}
+
+Animal &Animal::operator = (const Animal &animal){
+    this->~Animal();
+    Animal *newAnim = new Animal(animal);
+    return *newAnim;
+}
+
 void Animal::UpdateName(char *name){
     if (this->name)
         delete[] this->name;
