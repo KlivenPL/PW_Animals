@@ -4,6 +4,7 @@
 using namespace std;
 
 int main() {
+    cout << "List1:" << endl;
     AnimalList *list1 = new AnimalList();
     list1->modify("Nowa z Modify", 55, 11)=3333;
     list1->PrintAnimals();
@@ -15,7 +16,7 @@ int main() {
     list1->AddAnimal("Anna5", 5, 1, 1);
     list1->AddAnimal("Anna6", 6, 1, 1);
     list1->PrintAnimals();
-    list1->AddAnimal("ZmianaNAawy", 4, 1, 1);
+    list1->AddAnimal("ZmianaNazwy", 4, 1, 1);
     list1->AddAnimal("Renia1", 50, 3, 1);
     list1->AddAnimal("Berta1", 51, 2, 1);
     list1->AddAnimal("Berta2", 61, 2, 1);
@@ -32,6 +33,7 @@ int main() {
     list1->PrintAnimals();
     delete list1;
 
+    cout << endl << endl << "List2:" << endl;
     AnimalList list2;
     list2.modify("Nowa z Modify", 55, 11)=3333;
     list2.PrintAnimals();
@@ -43,7 +45,7 @@ int main() {
     list2.AddAnimal("Anna5", 5, 1, 1);
     list2.AddAnimal("Anna6", 6, 1, 1);
     list2.PrintAnimals();
-    list2.AddAnimal("ZmianaNAawy", 4, 1, 1);
+    list2.AddAnimal("ZmianaNazwy", 4, 1, 1);
     list2.AddAnimal("Renia1", 50, 3, 1);
     list2.AddAnimal("Berta1", 51, 2, 1);
     list2.AddAnimal("Berta2", 61, 2, 1);
