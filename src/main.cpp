@@ -12,7 +12,7 @@ int main() {
     list1->AddAnimal("dublikat", 69, 911, 1);
 
     AnimalList *list2 = new AnimalList();
-    list1->AddAnimal("losowy2", 30, 30, 40);
+    list2->AddAnimal("losowy2", 30, 30, 40);
     list2->AddAnimal("list2 anim1", 4, 54, 1);
     list2->AddAnimal("a ten jest", 99, 365, 1);
     list2->AddAnimal("tego nie ma 2", 6, 10, 1);
@@ -28,7 +28,5 @@ int main() {
     delete list1;
     delete list2;
     addList.PrintAnimals();
-
-
     return 0;
 }
