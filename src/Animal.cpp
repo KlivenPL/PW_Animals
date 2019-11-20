@@ -12,13 +12,13 @@ Animal::Animal (char *name, int id, int ownerId, int days){
     this->days = days;
     this->next = nullptr;
 
-    cout << "New animal created: ";
-    PrintAnimal();
+//    cout << "New animal created: ";
+//    PrintAnimal();
 }
 
 Animal::~Animal(){
-    cout << "Animal deleted: ";
-    PrintAnimal();
+ //   cout << "Animal deleted: ";
+//    PrintAnimal();
     if (this->name)
         delete[] this->name;
 }
@@ -31,8 +31,8 @@ Animal::Animal(const Animal &animal){
     this->days = animal.days;
     this->next = nullptr;
 
-    cout << "Animal copied: ";
-    PrintAnimal();
+ //   cout << "Animal copied: ";
+//    PrintAnimal();
 }
 
 Animal &Animal::operator = (const Animal &animal){
@@ -44,8 +44,8 @@ Animal &Animal::operator = (const Animal &animal){
     this->days = animal.days;
     this->next = nullptr;
 
-    cout << "Animal copied: ";
-    PrintAnimal();
+ //   cout << "Animal copied: ";
+//    PrintAnimal();
     return *this;
 }
 

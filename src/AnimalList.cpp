@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstring>
 #include "../include/AnimalList.h"
+
 using namespace std;
 
 
@@ -23,8 +24,77 @@ AnimalList &AnimalList::operator= (const AnimalList &animalList){
     return *newList;
 }
 
+AnimalList AnimalList::operator - (const AnimalList &list2const) const {
+    AnimalList *list = new AnimalList(*this);
+    Animal *node1 = list->head;
+    Animal *node2 = list2const.head;
+    AnimalList list2 = (AnimalList) list2const;
+
+    int count1 = list->Count(node1);
+    int count2 = ((AnimalList) list2).Count(node2);
+    
+    for (int i = count1 - 1; i >= 0; i--){
+        Animal *list1Anim = list->GetAnimalAtIndex(i);
+        for (int j = count2 - 1; j >= 0; j--){
+            Animal *list2Anim = list2.GetAnimalAtIndex(j);
+            if (list1Anim->Id() == list2Anim->Id()){
+                list->RemoveAnimal(list1Anim);
+            }
+        }
+    }
+    return *list;
+}
+
+AnimalList operator + (const AnimalList &list1const, const AnimalList &list2const) {
+    AnimalList list1 = (AnimalList) list1const;
+    AnimalList list2 = (AnimalList) list2const;
+
+    AnimalList *newList = new AnimalList(list1);
+
+    int count2 = list2.Count(list2.head);
+    
+    for (int i = 0; i < count2 ; i++){
+        Animal *anim2 = list2.GetAnimalAtIndex(i);
+        auto sameIdAnimal = list1.FindFirstThat([&anim2] (Animal tmpAnim) -> bool { return (tmpAnim.Id() == anim2->Id());});
+        if (sameIdAnimal){
+            // trzeba znalezc instancje tego zwierza w nowej liscie.
+            auto sameIdAnimalNewList = newList->FindFirstThat([&anim2] (Animal tmpAnim) -> bool { return (tmpAnim.Id() == anim2->Id());});
+            sameIdAnimalNewList->Owner_id() = anim2->Owner_id();
+            if (strcmp(sameIdAnimal->Name(), anim2->Name())){
+                // bledne dane - usuwamy zwierzaka
+                newList->RemoveAnimal(sameIdAnimalNewList);
+            }
+        } else {
+            // nie ma animala z takim id w list1
+            newList->AddAnimal(anim2->Name(), anim2->Id(), anim2->Owner_id(), anim2->Days());
+        }
+    }
+    // tanie (w napisaniu) sortowanie 
+    AnimalList *finalList = new AnimalList();
+    int newListCount = newList->Count(newList->head);
+    for (int i = 0; i < newListCount; i++){
+        Animal *anim = newList->GetAnimalAtIndex(i);
+        finalList->AddAnimal(anim->Name(), anim->Id(), anim->Owner_id(), anim->Days());
+    }
+    delete newList;
+    return *finalList;
+}
+
+Animal *AnimalList::FindFirstThat(std::function<bool(Animal &animal)> predicate){
+    int count = Count(head);
+    for (int i = 0; i < count; i++){
+        Animal *tmpAnim = GetAnimalAtIndex(i);
+        if (predicate(*tmpAnim))
+            return tmpAnim;
+    }
+    return nullptr;
+    
+}
+
 AnimalList::AnimalList(const AnimalList &animalList){
-    cout << "Kopiuje liste" << endl;
+    if (this->head == animalList.head)
+        return;
+//    cout << "Kopiuje liste" << endl;
     this->head = new Animal(*animalList.head);
     Animal *nodeExisting = animalList.head;
     Animal *nodeNew = head;
@@ -35,6 +105,8 @@ AnimalList::AnimalList(const AnimalList &animalList){
     }
     
 }
+
+
 
 void AnimalList::PrintAnimals(Animal *node){
     if (node != nullptr){
