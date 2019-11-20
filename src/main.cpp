@@ -64,11 +64,21 @@ int main() {
 
     //list1=&list2;
     //list1->PrintAnimals();
-
+    cout << endl << endl << "Copy1:" << endl;
     AnimalList copy1 = *list1;
+    copy1.PrintAnimals();
+    cout << endl << endl << "Copy2:" << endl;
     AnimalList copy2 = list2;
+    copy2.PrintAnimals();
 
+    cout << endl << endl << "DynCopyListFromList1:" << endl;
+    AnimalList *dynList1 = new AnimalList(*list1);
+    delete list1;
+    dynList1->PrintAnimals();
 
+    cout << endl << endl << "DynCopyListFromCopy2:" << endl;
+    AnimalList *dynList2 = new AnimalList(copy2);
+    dynList2->PrintAnimals();
 
     return 0;
 }

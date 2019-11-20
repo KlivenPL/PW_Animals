@@ -37,8 +37,16 @@ Animal::Animal(const Animal &animal){
 
 Animal &Animal::operator = (const Animal &animal){
     this->~Animal();
-    Animal *newAnim = new Animal(animal);
-    return *newAnim;
+    this->name = nullptr;
+    UpdateName(animal.name);
+    this->id = animal.id;
+    this->owner_id = animal.owner_id;
+    this->days = animal.days;
+    this->next = nullptr;
+
+    cout << "Animal copied: ";
+    PrintAnimal();
+    return *this;
 }
 
 void Animal::UpdateName(char *name){
